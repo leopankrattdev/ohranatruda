@@ -1,0 +1,1056 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Охрана труда — Безопасность на рабочем месте</title>
+<style>
+  * {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+  }
+
+  :root {
+    --primary: #2563eb;
+    --primary-dark: #1e40af;
+    --accent: #f59e0b;
+    --dark: #0f172a;
+    --gray: #64748b;
+    --light: #f1f5f9;
+    --white: #ffffff;
+    --success: #10b981;
+    --danger: #ef4444;
+  }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+    color: var(--dark);
+    background: var(--white);
+    line-height: 1.6;
+    overflow-x: hidden;
+  }
+
+  /* ===== HEADER ===== */
+  header {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    background: rgba(255, 255, 255, 0.95);
+    backdrop-filter: blur(12px);
+    z-index: 1000;
+    border-bottom: 1px solid rgba(0,0,0,0.05);
+    transition: all 0.3s ease;
+  }
+
+  .nav {
+    max-width: 1280px;
+    margin: 0 auto;
+    padding: 18px 24px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  .logo {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    font-weight: 800;
+    font-size: 20px;
+    color: var(--dark);
+    text-decoration: none;
+  }
+
+  .logo-icon {
+    width: 40px;
+    height: 40px;
+    background: linear-gradient(135deg, var(--primary), var(--primary-dark));
+    border-radius: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: white;
+    font-size: 20px;
+    box-shadow: 0 4px 14px rgba(37, 99, 235, 0.35);
+  }
+
+  .nav-links {
+    display: flex;
+    gap: 32px;
+    list-style: none;
+  }
+
+  .nav-links a {
+    text-decoration: none;
+    color: var(--dark);
+    font-weight: 500;
+    font-size: 15px;
+    transition: color 0.2s;
+    position: relative;
+  }
+
+  .nav-links a::after {
+    content: '';
+    position: absolute;
+    bottom: -6px;
+    left: 0;
+    width: 0;
+    height: 2px;
+    background: var(--primary);
+    transition: width 0.3s;
+  }
+
+  .nav-links a:hover { color: var(--primary); }
+  .nav-links a:hover::after { width: 100%; }
+
+  .btn {
+    padding: 12px 24px;
+    border-radius: 10px;
+    border: none;
+    font-weight: 600;
+    font-size: 15px;
+    cursor: pointer;
+    text-decoration: none;
+    display: inline-block;
+    transition: all 0.3s ease;
+    font-family: inherit;
+  }
+
+  .btn-primary {
+    background: var(--primary);
+    color: white;
+    box-shadow: 0 4px 14px rgba(37, 99, 235, 0.3);
+  }
+
+  .btn-primary:hover {
+    background: var(--primary-dark);
+    transform: translateY(-2px);
+    box-shadow: 0 8px 20px rgba(37, 99, 235, 0.4);
+  }
+
+  .btn-outline {
+    background: transparent;
+    color: var(--dark);
+    border: 2px solid var(--dark);
+  }
+
+  .btn-outline:hover {
+    background: var(--dark);
+    color: white;
+  }
+
+  .burger {
+    display: none;
+    background: none;
+    border: none;
+    font-size: 26px;
+    cursor: pointer;
+  }
+
+  /* ===== HERO ===== */
+  .hero {
+    padding: 160px 24px 100px;
+    background: linear-gradient(135deg, #eff6ff 0%, #fef3c7 100%);
+    position: relative;
+    overflow: hidden;
+  }
+
+  .hero::before {
+    content: '';
+    position: absolute;
+    top: -100px;
+    right: -100px;
+    width: 500px;
+    height: 500px;
+    background: radial-gradient(circle, rgba(37,99,235,0.15), transparent 70%);
+    border-radius: 50%;
+  }
+
+  .hero::after {
+    content: '';
+    position: absolute;
+    bottom: -150px;
+    left: -100px;
+    width: 400px;
+    height: 400px;
+    background: radial-gradient(circle, rgba(245,158,11,0.15), transparent 70%);
+    border-radius: 50%;
+  }
+
+  .hero-container {
+    max-width: 1280px;
+    margin: 0 auto;
+    display: grid;
+    grid-template-columns: 1.1fr 0.9fr;
+    gap: 60px;
+    align-items: center;
+    position: relative;
+    z-index: 1;
+  }
+
+  .badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    padding: 8px 16px;
+    background: rgba(37, 99, 235, 0.1);
+    color: var(--primary);
+    border-radius: 100px;
+    font-size: 13px;
+    font-weight: 600;
+    margin-bottom: 24px;
+  }
+
+  .badge-dot {
+    width: 8px;
+    height: 8px;
+    background: var(--success);
+    border-radius: 50%;
+    animation: pulse 2s infinite;
+  }
+
+  @keyframes pulse {
+    0%, 100% { opacity: 1; transform: scale(1); }
+    50% { opacity: 0.5; transform: scale(1.2); }
+  }
+
+  .hero h1 {
+    font-size: clamp(2.2rem, 5vw, 3.8rem);
+    line-height: 1.1;
+    font-weight: 800;
+    letter-spacing: -0.02em;
+    margin-bottom: 24px;
+  }
+
+  .hero h1 span {
+    background: linear-gradient(135deg, var(--primary), var(--accent));
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+  }
+
+  .hero p {
+    font-size: 18px;
+    color: var(--gray);
+    margin-bottom: 36px;
+    max-width: 540px;
+  }
+
+  .hero-buttons {
+    display: flex;
+    gap: 16px;
+    flex-wrap: wrap;
+  }
+
+  .hero-stats {
+    display: flex;
+    gap: 40px;
+    margin-top: 50px;
+    padding-top: 32px;
+    border-top: 1px solid rgba(0,0,0,0.08);
+  }
+
+  .stat-value {
+    font-size: 32px;
+    font-weight: 800;
+    color: var(--primary);
+    display: block;
+  }
+
+  .stat-label {
+    font-size: 14px;
+    color: var(--gray);
+  }
+
+  /* Hero visual */
+  .hero-visual {
+    position: relative;
+    height: 480px;
+  }
+
+  .card-float {
+    position: absolute;
+    background: white;
+    border-radius: 20px;
+    padding: 22px;
+    box-shadow: 0 20px 50px rgba(0,0,0,0.12);
+    animation: float 6s ease-in-out infinite;
+  }
+
+  .card-float.card-1 {
+    top: 20px;
+    left: 0;
+    width: 260px;
+    animation-delay: 0s;
+  }
+
+  .card-float.card-2 {
+    bottom: 40px;
+    right: 0;
+    width: 280px;
+    animation-delay: 2s;
+  }
+
+  .card-float.card-3 {
+    top: 200px;
+    right: 40px;
+    width: 200px;
+    animation-delay: 4s;
+    background: linear-gradient(135deg, var(--primary), var(--primary-dark));
+    color: white;
+  }
+
+  @keyframes float {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(-15px); }
+  }
+
+  .card-icon {
+    width: 44px;
+    height: 44px;
+    border-radius: 12px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 22px;
+    margin-bottom: 14px;
+    background: var(--light);
+  }
+
+  .card-3 .card-icon {
+    background: rgba(255,255,255,0.2);
+  }
+
+  .card-title {
+    font-weight: 700;
+    font-size: 16px;
+    margin-bottom: 6px;
+  }
+
+  .card-desc {
+    font-size: 13px;
+    color: var(--gray);
+    line-height: 1.4;
+  }
+
+  .card-3 .card-desc { color: rgba(255,255,255,0.85); }
+
+  .progress-bar {
+    width: 100%;
+    height: 6px;
+    background: var(--light);
+    border-radius: 3px;
+    margin-top: 12px;
+    overflow: hidden;
+  }
+
+  .progress-fill {
+    height: 100%;
+    background: linear-gradient(90deg, var(--success), #34d399);
+    border-radius: 3px;
+    animation: fillBar 2s ease-out;
+  }
+
+  @keyframes fillBar {
+    from { width: 0; }
+    to { width: 94%; }
+  }
+
+  /* ===== SECTIONS ===== */
+  section {
+    padding: 100px 24px;
+  }
+
+  .container {
+    max-width: 1280px;
+    margin: 0 auto;
+  }
+
+  .section-header {
+    text-align: center;
+    max-width: 680px;
+    margin: 0 auto 70px;
+  }
+
+  .section-label {
+    color: var(--primary);
+    font-weight: 700;
+    font-size: 14px;
+    text-transform: uppercase;
+    letter-spacing: 1.5px;
+    margin-bottom: 14px;
+  }
+
+  .section-title {
+    font-size: clamp(1.8rem, 4vw, 2.8rem);
+    font-weight: 800;
+    letter-spacing: -0.02em;
+    margin-bottom: 18px;
+    line-height: 1.15;
+  }
+
+  .section-desc {
+    color: var(--gray);
+    font-size: 17px;
+  }
+
+  /* ===== FEATURES ===== */
+  .features-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 28px;
+  }
+
+  .feature-card {
+    background: white;
+    border: 1px solid rgba(0,0,0,0.06);
+    border-radius: 20px;
+    padding: 36px 30px;
+    transition: all 0.4s ease;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .feature-card::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 4px;
+    background: linear-gradient(90deg, var(--primary), var(--accent));
+    transform: scaleX(0);
+    transform-origin: left;
+    transition: transform 0.4s ease;
+  }
+
+  .feature-card:hover {
+    transform: translateY(-8px);
+    box-shadow: 0 24px 48px rgba(0,0,0,0.1);
+    border-color: transparent;
+  }
+
+  .feature-card:hover::before {
+    transform: scaleX(1);
+  }
+
+  .feature-icon {
+    width: 60px;
+    height: 60px;
+    border-radius: 16px;
+    background: linear-gradient(135deg, #eff6ff, #dbeafe);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 28px;
+    margin-bottom: 22px;
+  }
+
+  .feature-card h3 {
+    font-size: 20px;
+    font-weight: 700;
+    margin-bottom: 12px;
+  }
+
+  .feature-card p {
+    color: var(--gray);
+    font-size: 15px;
+  }
+
+  /* ===== SERVICES ===== */
+  .services {
+    background: var(--dark);
+    color: white;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .services::before {
+    content: '';
+    position: absolute;
+    top: -200px;
+    right: -200px;
+    width: 600px;
+    height: 600px;
+    background: radial-gradient(circle, rgba(37,99,235,0.3), transparent 70%);
+    border-radius: 50%;
+  }
+
+  .services .section-label { color: #60a5fa; }
+  .services .section-title { color: white; }
+  .services .section-desc { color: #94a3b8; }
+
+  .services-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 24px;
+    position: relative;
+    z-index: 1;
+  }
+
+  .service-card {
+    background: rgba(255,255,255,0.05);
+    border: 1px solid rgba(255,255,255,0.1);
+    border-radius: 20px;
+    padding: 32px 28px;
+    transition: all 0.4s ease;
+    backdrop-filter: blur(10px);
+  }
+
+  .service-card:hover {
+    background: rgba(255,255,255,0.1);
+    transform: translateY(-6px);
+    border-color: rgba(96, 165, 250, 0.5);
+  }
+
+  .service-num {
+    font-size: 14px;
+    font-weight: 700;
+    color: #60a5fa;
+    margin-bottom: 16px;
+    letter-spacing: 1px;
+  }
+
+  .service-card h3 {
+    font-size: 19px;
+    font-weight: 700;
+    margin-bottom: 12px;
+  }
+
+  .service-card p {
+    color: #94a3b8;
+    font-size: 15px;
+  }
+
+  /* ===== DOCUMENTS ===== */
+  .docs-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+    gap: 24px;
+  }
+
+  .doc-card {
+    display: flex;
+    gap: 20px;
+    padding: 28px;
+    background: white;
+    border: 1px solid rgba(0,0,0,0.06);
+    border-radius: 18px;
+    transition: all 0.3s ease;
+    align-items: flex-start;
+  }
+
+  .doc-card:hover {
+    border-color: var(--primary);
+    box-shadow: 0 12px 30px rgba(37,99,235,0.12);
+    transform: translateY(-4px);
+  }
+
+  .doc-icon {
+    flex-shrink: 0;
+    width: 52px;
+    height: 52px;
+    background: linear-gradient(135deg, #fef3c7, #fde68a);
+    border-radius: 14px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 24px;
+  }
+
+  .doc-card h4 {
+    font-size: 16px;
+    font-weight: 700;
+    margin-bottom: 6px;
+  }
+
+  .doc-card p {
+    font-size: 14px;
+    color: var(--gray);
+    margin-bottom: 10px;
+  }
+
+  .doc-link {
+    font-size: 14px;
+    color: var(--primary);
+    font-weight: 600;
+    text-decoration: none;
+  }
+
+  .doc-link:hover { text-decoration: underline; }
+
+  /* ===== CTA ===== */
+  .cta {
+    background: linear-gradient(135deg, var(--primary), var(--primary-dark));
+    border-radius: 32px;
+    padding: 70px 50px;
+    text-align: center;
+    color: white;
+    position: relative;
+    overflow: hidden;
+    margin: 0 auto;
+    max-width: 1280px;
+  }
+
+  .cta::before {
+    content: '';
+    position: absolute;
+    top: -50%;
+    right: -10%;
+    width: 400px;
+    height: 400px;
+    background: radial-gradient(circle, rgba(245,158,11,0.4), transparent 70%);
+    border-radius: 50%;
+  }
+
+  .cta h2 {
+    font-size: clamp(1.8rem, 4vw, 2.6rem);
+    font-weight: 800;
+    margin-bottom: 18px;
+    position: relative;
+  }
+
+  .cta p {
+    font-size: 18px;
+    opacity: 0.9;
+    margin-bottom: 32px;
+    max-width: 600px;
+    margin-left: auto;
+    margin-right: auto;
+    position: relative;
+  }
+
+  .cta .btn {
+    background: white;
+    color: var(--primary);
+    position: relative;
+  }
+
+  .cta .btn:hover {
+    background: var(--accent);
+    color: white;
+    transform: translateY(-2px);
+  }
+
+  /* ===== FOOTER ===== */
+  footer {
+    background: var(--dark);
+    color: #94a3b8;
+    padding: 60px 24px 30px;
+  }
+
+  .footer-container {
+    max-width: 1280px;
+    margin: 0 auto;
+  }
+
+  .footer-grid {
+    display: grid;
+    grid-template-columns: 2fr 1fr 1fr 1fr;
+    gap: 50px;
+    margin-bottom: 50px;
+  }
+
+  .footer-brand .logo {
+    color: white;
+    margin-bottom: 18px;
+  }
+
+  .footer-brand p {
+    font-size: 15px;
+    line-height: 1.7;
+    max-width: 320px;
+  }
+
+  .footer-col h4 {
+    color: white;
+    font-size: 16px;
+    margin-bottom: 20px;
+    font-weight: 700;
+  }
+
+  .footer-col ul {
+    list-style: none;
+  }
+
+  .footer-col li {
+    margin-bottom: 12px;
+  }
+
+  .footer-col a {
+    color: #94a3b8;
+    text-decoration: none;
+    font-size: 15px;
+    transition: color 0.2s;
+  }
+
+  .footer-col a:hover { color: #60a5fa; }
+
+  .footer-bottom {
+    border-top: 1px solid rgba(255,255,255,0.1);
+    padding-top: 28px;
+    text-align: center;
+    font-size: 14px;
+  }
+
+  /* ===== RESPONSIVE ===== */
+  @media (max-width: 968px) {
+    .nav-links { display: none; }
+    .burger { display: block; }
+
+    .hero-container {
+      grid-template-columns: 1fr;
+      gap: 40px;
+    }
+
+    .hero-visual { height: 380px; }
+
+    .footer-grid {
+      grid-template-columns: 1fr 1fr;
+      gap: 40px;
+    }
+  }
+
+  @media (max-width: 600px) {
+    section { padding: 70px 20px; }
+    .hero { padding: 130px 20px 70px; }
+    .hero-stats { flex-wrap: wrap; gap: 24px; }
+    .card-float.card-3 { display: none; }
+    .hero-visual { height: 320px; }
+    .card-float.card-1 { width: 220px; }
+    .card-float.card-2 { width: 230px; }
+    .cta { padding: 50px 24px; border-radius: 24px; }
+    .footer-grid { grid-template-columns: 1fr; }
+    .hero-buttons .btn { width: 100%; text-align: center; }
+  }
+</style>
+</head>
+<body>
+
+<!-- HEADER -->
+<header>
+  <nav class="nav">
+    <a href="#" class="logo">
+      <div class="logo-icon">🛡️</div>
+      <span>ОхранаТруда</span>
+    </a>
+    <ul class="nav-links">
+      <li><a href="#features">Возможности</a></li>
+      <li><a href="#services">Услуги</a></li>
+      <li><a href="#docs">Документы</a></li>
+      <li><a href="#contact">Контакты</a></li>
+    </ul>
+    <a href="#contact" class="btn btn-primary">Консультация</a>
+  </nav>
+</header>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-container">
+    <div class="hero-content">
+      <div class="badge">
+        <span class="badge-dot"></span>
+        Соответствие ГОСТ и ТК РФ
+      </div>
+      <h1>Безопасность труда — <span>основа успешного бизнеса</span></h1>
+      <p>Полный спектр услуг по охране труда: аудит, обучение, документооборот и сопровождение проверок. Защитите сотрудников и бизнес от рисков.</p>
+      <div class="hero-buttons">
+        <a href="#contact" class="btn btn-primary">Получить консультацию →</a>
+        <a href="#services" class="btn btn-outline">Наши услуги</a>
+      </div>
+      <div class="hero-stats">
+        <div>
+          <span class="stat-value">500+</span>
+          <span class="stat-label">компаний-клиентов</span>
+        </div>
+        <div>
+          <span class="stat-value">12 лет</span>
+          <span class="stat-label">на рынке</span>
+        </div>
+        <div>
+          <span class="stat-value">100%</span>
+          <span class="stat-label">успешных проверок</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="hero-visual">
+      <div class="card-float card-1">
+        <div class="card-icon">📋</div>
+        <div class="card-title">Аудит СОУТ</div>
+        <div class="card-desc">Оценка условий труда на рабочих местах</div>
+        <div class="progress-bar"><div class="progress-fill"></div></div>
+      </div>
+
+      <div class="card-float card-2">
+        <div class="card-icon">🎓</div>
+        <div class="card-title">Обучение персонала</div>
+        <div class="card-desc">Программы для руководителей и специалистов</div>
+      </div>
+
+      <div class="card-float card-3">
+        <div class="card-icon">✓</div>
+        <div class="card-title">Проверка пройдена</div>
+        <div class="card-desc">Все документы в порядке</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FEATURES -->
+<section id="features">
+  <div class="container">
+    <div class="section-header">
+      <div class="section-label">Почему мы</div>
+      <h2 class="section-title">Комплексный подход к охране труда</h2>
+      <p class="section-desc">Мы берём на себя все задачи — от разработки документов до сопровождения проверок государственных инспекций.</p>
+    </div>
+
+    <div class="features-grid">
+      <div class="feature-card">
+        <div class="feature-icon">⚖️</div>
+        <h3>Соответствие закону</h3>
+        <p>Актуализируем документацию согласно последним изменениям ТК РФ и нормативных актов.</p>
+      </div>
+
+      <div class="feature-card">
+        <div class="feature-icon">🔍</div>
+        <h3>Аудит и СОУТ</h3>
+        <p>Проводим специальную оценку условий труда и выявляем профессиональные риски.</p>
+      </div>
+
+      <div class="feature-card">
+        <div class="feature-icon">🎓</div>
+        <h3>Обучение и аттестация</h3>
+        <p>Обучаем руководителей, специалистов и рабочих по всем направлениям охраны труда.</p>
+      </div>
+
+      <div class="feature-card">
+        <div class="feature-icon">📁</div>
+        <h3>Документооборот</h3>
+        <p>Разрабатываем полный пакет документов: инструкции, журналы, приказы, положения.</p>
+      </div>
+
+      <div class="feature-card">
+        <div class="feature-icon">🛡️</div>
+        <h3>Сопровождение проверок</h3>
+        <p>Готовим к проверкам ГИТ и Ростехнадзора, представляем интересы компании.</p>
+      </div>
+
+      <div class="feature-card">
+        <div class="feature-icon">💼</div>
+        <h3>Аутсорсинг специалиста</h3>
+        <p>Предоставляем квалифицированного инженера по охране труда на постоянной основе.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- SERVICES -->
+<section id="services" class="services">
+  <div class="container">
+    <div class="section-header">
+      <div class="section-label">Услуги</div>
+      <h2 class="section-title">Что мы предлагаем</h2>
+      <p class="section-desc">Полный цикл работ по обеспечению безопасных условий труда для вашего бизнеса.</p>
+    </div>
+
+    <div class="services-grid">
+      <div class="service-card">
+        <div class="service-num">01</div>
+        <h3>Специальная оценка условий труда</h3>
+        <p>Проведение СОУТ с оформлением всех необходимых документов и отчётов.</p>
+      </div>
+
+      <div class="service-card">
+        <div class="service-num">02</div>
+        <h3>Обучение по охране труда</h3>
+        <p>Программы обучения для руководителей, специалистов и рабочих профессий.</p>
+      </div>
+
+      <div class="service-card">
+        <div class="service-num">03</div>
+        <h3>Разработка документации</h3>
+        <p>Полный пакет документов по охране труда с учётом специфики вашей отрасли.</p>
+      </div>
+
+      <div class="service-card">
+        <div class="service-num">04</div>
+        <h3>Медицинские осмотры</h3>
+        <p>Организация предварительных, периодических и предрейсовых осмотров.</p>
+      </div>
+
+      <div class="service-card">
+        <div class="service-num">05</div>
+        <h3>Пожарная безопасность</h3>
+        <p>Разработка документации, обучение и аудит по пожарной безопасности.</p>
+      </div>
+
+      <div class="service-card">
+        <div class="service-num">06</div>
+        <h3>Аутсорсинг охраны труда</h3>
+        <p>Передача функций по охране труда нашим специалистам — экономия и качество.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- DOCUMENTS -->
+<section id="docs">
+  <div class="container">
+    <div class="section-header">
+      <div class="section-label">Документы</div>
+      <h2 class="section-title">Полезные материалы</h2>
+      <p class="section-desc">Актуальные нормативные документы и шаблоны для самостоятельной работы.</p>
+    </div>
+
+    <div class="docs-grid">
+      <div class="doc-card">
+        <div class="doc-icon">📄</div>
+        <div>
+          <h4>Инструкции по охране труда</h4>
+          <p>Шаблоны для 50+ профессий и видов работ</p>
+          <a href="#" class="doc-link">Скачать →</a>
+        </div>
+      </div>
+
+      <div class="doc-card">
+        <div class="doc-icon">📊</div>
+        <div>
+          <h4>Журналы и формы учёта</h4>
+          <p>Все необходимые журналы в формате DOCX</p>
+          <a href="#" class="doc-link">Скачать →</a>
+        </div>
+      </div>
+
+      <div class="doc-card">
+        <div class="doc-icon">📘</div>
+        <div>
+          <h4>Методические пособия</h4>
+          <p>Руководства по организации охраны труда</p>
+          <a href="#" class="doc-link">Скачать →</a>
+        </div>
+      </div>
+
+      <div class="doc-card">
+        <div class="doc-icon">⚙️</div>
+        <div>
+          <h4>Положения и приказы</h4>
+          <p>Образцы организационно-правовых документов</p>
+          <a href="#" class="doc-link">Скачать →</a>
+        </div>
+      </div>
+
+      <div class="doc-card">
+        <div class="doc-icon">🔔</div>
+        <div>
+          <h4>Памятки для работников</h4>
+          <p>Инфографика по безопасным методам работы</p>
+          <a href="#" class="doc-link">Скачать →</a>
+        </div>
+      </div>
+
+      <div class="doc-card">
+        <div class="doc-icon">📋</div>
+        <div>
+          <h4>Чек-листы проверок</h4>
+          <p>Готовые списки для самопроверки перед ГИТ</p>
+          <a href="#" class="doc-link">Скачать →</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CTA -->
+<section id="contact">
+  <div class="cta">
+    <h2>Начните с бесплатной консультации</h2>
+    <p>Оставьте заявку — наш эксперт свяжется с вами в течение 15 минут и подберёт оптимальное решение для вашего бизнеса.</p>
+    <a href="mailto:info@ohranatruda.ru" class="btn">Получить консультацию</a>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-container">
+    <div class="footer-grid">
+      <div class="footer-brand">
+        <a href="#" class="logo">
+          <div class="logo-icon">🛡️</div>
+          <span>ОхранаТруда</span>
+        </a>
+        <p>Профессиональное сопровождение бизнеса по охране труда, пожарной и промышленной безопасности с 2012 года.</p>
+      </div>
+
+      <div class="footer-col">
+        <h4>Услуги</h4>
+        <ul>
+          <li><a href="#">СОУТ</a></li>
+          <li><a href="#">Обучение</a></li>
+          <li><a href="#">Аутсорсинг</a></li>
+          <li><a href="#">Аудит</a></li>
+        </ul>
+      </div>
+
+      <div class="footer-col">
+        <h4>Компания</h4>
+        <ul>
+          <li><a href="#">О нас</a></li>
+          <li><a href="#">Кейсы</a></li>
+          <li><a href="#">Отзывы</a></li>
+          <li><a href="#">Контакты</a></li>
+        </ul>
+      </div>
+
+      <div class="footer-col">
+        <h4>Контакты</h4>
+        <ul>
+          <li><a href="tel:+74951234567">+7 (495) 123-45-67</a></li>
+          <li><a href="mailto:info@ohranatruda.ru">info@ohranatruda.ru</a></li>
+          <li><a href="#">Москва, ул. Примерная, 1</a></li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="footer-bottom">
+      © 2025 ОхранаТруда. Все права защищены.
+    </div>
+  </div>
+</footer>
+
+<script>
+  // Плавная прокрутка и подсветка шапки
+  const header = document.querySelector('header');
+  window.addEventListener('scroll', () => {
+    if (window.scrollY > 20) {
+      header.style.boxShadow = '0 4px 20px rgba(0,0,0,0.08)';
+    } else {
+      header.style.boxShadow = 'none';
+    }
+  });
+
+  // Анимация появления секций
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        entry.target.style.opacity = '1';
+        entry.target.style.transform = 'translateY(0)';
+      }
+    });
+  }, { threshold: 0.1 });
+
+  document.querySelectorAll('.feature-card, .service-card, .doc-card').forEach(el => {
+    el.style.opacity = '0';
+    el.style.transform = 'translateY(30px)';
+    el.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
+    observer.observe(el);
+  });
+</script>
+
+</body>
+</html>
